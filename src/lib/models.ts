@@ -23,44 +23,102 @@ export interface DynamicFormField {
     formControls: (FormControl | CustomFormControl)[];
 }
 
-export interface FormControl {
+export abstract class FormControl {
     name: string;
     disabled?: boolean;
     show?: TypeOrTypeLike<boolean>;
     validator?: ValidatorFn | ValidatorFn[] | null;
-    type: Type<FormControlComponent>;
     value?: any;
+    get type() {
+        return this._type;
+    }
+    constructor(private _type: any) {}
 }
 
-export interface RadioFormControl extends FormControl {
-    type: Type<NgxMatDynamicRadioComponent>;
+export interface RadioFormControlOptions {
     radioButtons: TypeOrTypeLike<{value, viewValue}[]>;
     change?: (event: MatRadioChange) => void;
+    name: string;
+    disabled?: boolean;
+    show?: TypeOrTypeLike<boolean>;
+    validator?: ValidatorFn | ValidatorFn[] | null;
+    value?: any;
 }
-
-export interface SelectFormControl extends FormControl {
-    type: Type<NgxMatDynamicSelectComponent>;
+export class RadioFormControl extends FormControl implements RadioFormControlOptions {
+    radioButtons: TypeOrTypeLike<{ value; viewValue }[]>;
+    change?: (event: MatRadioChange) => void;
+    constructor(options: RadioFormControlOptions) {
+        super(NgxMatDynamicRadioComponent);
+        Object.keys(options).forEach(key => this[key] = options[key]);
+    }
+}
+export interface SelectFormControlOptions {
     options: TypeOrTypeLike<{value, viewValue}[]>;
     selectionChange?: (event: MatSelectChange) => void;
     placeholder?: TypeOrTypeLike<string>;
     width?: TypeOrTypeLike<string>;
+    name: string;
+    disabled?: boolean;
+    show?: TypeOrTypeLike<boolean>;
+    validator?: ValidatorFn | ValidatorFn[] | null;
+    value?: any;
 }
 
-export interface InputFormControl extends FormControl {
-    type: Type<NgxMatDynamicInputComponent>;
+export class SelectFormControl extends FormControl implements SelectFormControlOptions {
+    options: TypeOrTypeLike<{value, viewValue}[]>;
+    selectionChange?: (event: MatSelectChange) => void;
+    placeholder?: TypeOrTypeLike<string>;
+    width?: TypeOrTypeLike<string>;
+    constructor(options: SelectFormControlOptions) {
+        super(NgxMatDynamicSelectComponent);
+        Object.keys(options).forEach(key => this[key] = options[key]);
+    }
+}
+
+export interface InputFormControlOptions {
+    options?: TypeOrTypeLike<{value, viewValue}[]>;
+    optionSelected?: (event: MatAutocompleteSelectedEvent) => void;
+    width?: TypeOrTypeLike<string>;
+    placeholder?: TypeOrTypeLike<string>;
+    change?: (event) => void;
+    name: string;
+    disabled?: boolean;
+    show?: TypeOrTypeLike<boolean>;
+    validator?: ValidatorFn | ValidatorFn[] | null;
+    value?: string;
+}
+
+export class InputFormControl extends FormControl implements InputFormControlOptions {
     options?: TypeOrTypeLike<{value, viewValue}[]>;
     optionSelected?: (event: MatAutocompleteSelectedEvent) => void;
     width?: TypeOrTypeLike<string>;
     placeholder?: TypeOrTypeLike<string>;
     change?: (event) => void;
     value?: string;
+    constructor(options: InputFormControlOptions) {
+        super(NgxMatDynamicInputComponent);
+        Object.keys(options).forEach(key => this[key] = options[key]);
+    }
 }
 
-export interface CheckboxFormControl extends FormControl {
-    type: Type<NgxMatDynamicCheckboxComponent>;
+export interface CheckboxFormControlOptions {
     change?: (event: MatCheckboxChange) => void;
     text: TypeOrTypeLike<string>;
     value?: boolean;
+    name: string;
+    disabled?: boolean;
+    show?: TypeOrTypeLike<boolean>;
+    validator?: ValidatorFn | ValidatorFn[] | null;
+}
+
+export class CheckboxFormControl extends FormControl implements CheckboxFormControlOptions {
+    change?: (event: MatCheckboxChange) => void;
+    text: TypeOrTypeLike<string>;
+    value?: boolean;
+    constructor(options: CheckboxFormControlOptions) {
+        super(NgxMatDynamicCheckboxComponent);
+        Object.keys(options).forEach(key => this[key] = options[key]);
+    }
 }
 
 export interface CustomFormControl {
