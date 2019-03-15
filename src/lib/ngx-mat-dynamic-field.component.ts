@@ -26,7 +26,7 @@ import {NgxMatDynamicFormService} from './ngx-mat-dynamic-form.service';
             display: inline-block;
         }
         .field-class {
-            margin-top: 20px;
+            margin-top: 40px;
             place-items: center;
             display: flex;
         }

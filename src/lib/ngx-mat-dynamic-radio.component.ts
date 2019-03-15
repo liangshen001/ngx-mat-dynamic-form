@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {FormControlComponent, RadioFormControl} from './models';
 import {FormGroup} from '@angular/forms';
 import {NgxMatDynamicFormService} from './ngx-mat-dynamic-form.service';
+import {MatRadioButton} from '@angular/material';
 
 @Component({
     selector: 'ngx-mat-dynamic-radio',
@@ -24,6 +25,9 @@ export class NgxMatDynamicRadioComponent implements OnInit, FormControlComponent
 
     form: FormGroup;
 
+    @ViewChildren(MatRadioButton)
+    matRadioButtons: QueryList<MatRadioButton>;
+
     constructor(private dynamicFormService: NgxMatDynamicFormService) {
     }
 
@@ -31,15 +35,15 @@ export class NgxMatDynamicRadioComponent implements OnInit, FormControlComponent
     }
 
     show() {
-        return this.dynamicFormService.getValue(this.formControl, 'show', true);
+        return this.dynamicFormService.getValue(this.formControl, 'show', true, [this.matRadioButtons, this.form]);
     }
 
     width() {
-        return this.dynamicFormService.getValue(this.formControl, 'width', '70%');
+        return this.dynamicFormService.getValue(this.formControl, 'width', '70%', [this.matRadioButtons, this.form]);
     }
 
     radioButtons() {
-        return this.dynamicFormService.getValue(this.formControl, 'radioButtons', []);
+        return this.dynamicFormService.getValue(this.formControl, 'radioButtons', [], [this.matRadioButtons, this.form]);
     }
 
     transform() {

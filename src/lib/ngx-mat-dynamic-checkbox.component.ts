@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {CheckboxFormControl, FormControlComponent} from './models';
 import {FormGroup} from '@angular/forms';
 import {NgxMatDynamicFormService} from './ngx-mat-dynamic-form.service';
+import {MatCheckbox} from '@angular/material';
 
 @Component({
     selector: 'ngx-mat-dynamic-checkbox',
@@ -21,6 +22,9 @@ export class NgxMatDynamicCheckboxComponent implements OnInit, FormControlCompon
 
     form: FormGroup;
 
+    @ViewChildren(MatCheckbox)
+    matCheckboxes: QueryList<MatCheckbox>;
+
     constructor(private dynamicFormService: NgxMatDynamicFormService) {
     }
 
@@ -30,22 +34,22 @@ export class NgxMatDynamicCheckboxComponent implements OnInit, FormControlCompon
 
 
     show() {
-        return this.dynamicFormService.getValue(this.formControl, 'show', true);
+        return this.dynamicFormService.getValue(this.formControl, 'show', true, [this.matCheckboxes, this.form]);
     }
 
     width() {
-        return this.dynamicFormService.getValue(this.formControl, 'width', '70%');
+        return this.dynamicFormService.getValue(this.formControl, 'width', '70%', [this.matCheckboxes, this.form]);
     }
 
     placeholder() {
-        return this.dynamicFormService.getValue(this.formControl, 'placeholder', '');
+        return this.dynamicFormService.getValue(this.formControl, 'placeholder', '', [this.matCheckboxes, this.form]);
     }
 
     options() {
-        return this.dynamicFormService.getValue(this.formControl, 'options', []);
+        return this.dynamicFormService.getValue(this.formControl, 'options', [], [this.matCheckboxes, this.form]);
     }
 
     text() {
-        return this.dynamicFormService.getValue(this.formControl, 'text', '');
+        return this.dynamicFormService.getValue(this.formControl, 'text', '', [this.matCheckboxes, this.form]);
     }
 }

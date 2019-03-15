@@ -26,13 +26,6 @@ export class NgxMatDynamicDirective implements OnInit {
                 componentRef.instance.form = this.form;
             });
         });
-        // .forEach(formControl => {
-        //     const inputComponentFactory = this.componentFactoryResolver.resolveComponentFactory(
-        //         <Type<FormControlComponent>>formControl.type);
-        //     const componentRef = this.viewContainerRef.createComponent(inputComponentFactory);
-        //     componentRef.instance.formControl = formControl as any;
-        //     componentRef.instance.form = this.form;
-        // });
     }
 
 }

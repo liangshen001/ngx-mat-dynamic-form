@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ControlTranslate, DynamicFormField} from './models';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {NgxMatDynamicFormService} from './ngx-mat-dynamic-form.service';
 
 @Component({
@@ -46,6 +46,10 @@ export class NgxMatDynamicFormComponent implements OnInit {
                     }, validator]);
             }));
         this.form = this.formBuilder.group(controlsConfig);
+    }
+
+    markAllTouched() {
+        this.ngxMatDynamicFormService.markAllTouched(this.form);
     }
 
 }
