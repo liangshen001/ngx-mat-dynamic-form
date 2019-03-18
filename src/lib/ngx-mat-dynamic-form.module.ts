@@ -17,6 +17,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {NgxMatDynamicCheckboxComponent} from './ngx-mat-dynamic-checkbox.component';
 import {NgxMatDynamicFieldComponent} from './ngx-mat-dynamic-field.component';
 import {NgxMatDynamicDirective} from './ngx-mat-dynamic.directive';
+import {NgxMatDynamicTextareaComponent} from './ngx-mat-dynamic-textarea.component';
 
 @NgModule({
     imports: [
@@ -38,20 +39,23 @@ import {NgxMatDynamicDirective} from './ngx-mat-dynamic.directive';
         NgxMatDynamicRadioComponent,
         NgxMatDynamicCheckboxComponent,
         NgxMatDynamicFieldComponent,
-        NgxMatDynamicDirective
+        NgxMatDynamicDirective,
+        NgxMatDynamicTextareaComponent
     ],
     entryComponents: [
         NgxMatDynamicInputComponent,
         NgxMatDynamicSelectComponent,
         NgxMatDynamicRadioComponent,
-        NgxMatDynamicCheckboxComponent
+        NgxMatDynamicCheckboxComponent,
+        NgxMatDynamicTextareaComponent
     ],
     exports: [
         NgxMatDynamicFormComponent,
         NgxMatDynamicInputComponent,
         NgxMatDynamicSelectComponent,
         NgxMatDynamicRadioComponent,
-        NgxMatDynamicCheckboxComponent
+        NgxMatDynamicCheckboxComponent,
+        NgxMatDynamicTextareaComponent
     ]
 })
 export class NgxMatDynamicFormModule {
